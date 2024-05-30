@@ -1,11 +1,14 @@
-swagger: '2.0'
-openapi: 2.0.0
+swagger: "2.0"
 info:
   title: OpenAI API
   description: API for accessing OpenAI's language models.
   version: 1.0.0
-servers:
-  - url: https://api.openai.com/v1
+  
+host:: api.openai.com/
+basePath: /v1  
+schemes:
+  - https
+  
 paths:
   /completions:
     post:
@@ -148,14 +151,4 @@ paths:
                               is_blocking:
                                 type: boolean
                                 example: false
-
-components:
-  securitySchemes:
-    api_key:
-      type: apiKey
-      name: Authorization
-      in: header
-
-security:
-  - api_key: []
 
