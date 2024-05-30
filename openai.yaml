@@ -1,0 +1,160 @@
+openapi: 3.0.0
+info:
+  title: OpenAI API
+  description: API for accessing OpenAI's language models.
+  version: 1.0.0
+servers:
+  - url: https://api.openai.com/v1
+paths:
+  /completions:
+    post:
+      summary: Create a completion
+      description: Generates a completion for the provided prompt and parameters.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model:
+                  type: string
+                  description: ID of the model to use
+                  example: "text-davinci-003"
+                prompt:
+                  type: string
+                  description: The prompt to generate completions for
+                  example: "Once upon a time"
+                max_tokens:
+                  type: integer
+                  description: The maximum number of tokens to generate
+                  example: 100
+                temperature:
+                  type: number
+                  description: Sampling temperature
+                  example: 0.7
+      responses:
+        '200':
+          description: A successful completion response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the completion
+                    example: "cmpl-5FkA8EDM1Zc5eZvIAW55kuBh"
+                  object:
+                    type: string
+                    example: "text_completion"
+                  created:
+                    type: integer
+                    description: Timestamp of completion creation
+                    example: 1610078131
+                  model:
+                    type: string
+                    description: Model used for the completion
+                    example: "text-davinci-003"
+                  choices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                          description: The generated text
+                          example: "Once upon a time, there was a brave knight..."
+                        index:
+                          type: integer
+                          example: 0
+                        logprobs:
+                          type: object
+                          nullable: true
+                        finish_reason:
+                          type: string
+                          example: "length"
+  /models:
+    get:
+      summary: List available models
+      description: Retrieves a list of available models.
+      responses:
+        '200':
+          description: A list of models
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier for the model
+                          example: "text-davinci-003"
+                        object:
+                          type: string
+                          example: "model"
+                        created:
+                          type: integer
+                          description: Timestamp of model creation
+                          example: 1610078131
+                        owned_by:
+                          type: string
+                          description: Organization owning the model
+                          example: "openai"
+                        permission:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              id:
+                                type: string
+                                example: "modelperm-abc123"
+                              object:
+                                type: string
+                                example: "model_permission"
+                              created:
+                                type: integer
+                                example: 1610078131
+                              allow_create_engine:
+                                type: boolean
+                                example: true
+                              allow_sampling:
+                                type: boolean
+                                example: true
+                              allow_logprobs:
+                                type: boolean
+                                example: true
+                              allow_search_indices:
+                                type: boolean
+                                example: false
+                              allow_view:
+                                type: boolean
+                                example: true
+                              allow_fine_tuning:
+                                type: boolean
+                                example: false
+                              organization:
+                                type: string
+                                example: "openai"
+                              group:
+                                type: string
+                                nullable: true
+                              is_blocking:
+                                type: boolean
+                                example: false
+
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+
+security:
+  - api_key: []
+
