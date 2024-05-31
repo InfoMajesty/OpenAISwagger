@@ -38,9 +38,7 @@
                                                           "responses": {
                                                                         "200": {
                                                                                       "description": "Success"
-                                                                                      "schema": {
-                                                                                                     "$ref": "#/components/schemas/CompletionResponse"
-                                                                                      }
+                                                                                      
                                                                                 }
                                                           }
                                            }
@@ -67,22 +65,6 @@
                                                                                       "description": "Max number of tokens allowed",
                                                                                       "format": "int32"
                                                                         }
-                                                          }
-                                           },
-                                           "CompletionResponse": {
-                                                          "type": "object",
-                                                          "properties": {
-                                                                        "id": {
-                                                                                      "type": "string",
-                                                                                      "description": "ID response",
-                                                                                      "nullable": true
-                                                                        },
-                                                                        "choices": {
-                                                                                      "type": "string",
-                                                                                      "description": "chat response",
-                                                                                      "nullable": true
-                                                                        }             
-                                                                        
                                                           }
                                            }
                              }
