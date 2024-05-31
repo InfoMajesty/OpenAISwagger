@@ -82,7 +82,7 @@
                                                                                       "description": "chat response",
                                                                                       "nullable": true
                                                                         }             
-                                                                        }
+                                                                        
                                                           }
                                            }
                              }
