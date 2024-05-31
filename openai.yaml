@@ -3,7 +3,7 @@
               "info": {
                              "title": "OpenAI",
                              "version": "1.0",
-                             "title": "callback"
+                             "description": "callback"
               },
               "host": "api.openai.com",
               "basePath": "/v1",
