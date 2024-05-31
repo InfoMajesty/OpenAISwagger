@@ -37,7 +37,9 @@
                                                           ],
                                                           "responses": {
                                                                         "200": {
-                                                                                      "description": "Success"
+                                                                                      "in": "body",
+                                                                                      "name": "body",
+                                                                                      "description": "Success",
                                                                                       "schema": {
                                                                                                      "$ref": "#/components/schemas/CompletionResponse"
                                                                                       }
