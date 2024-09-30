@@ -56,49 +56,7 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "type": "object",
-              "properties": {
-                "afterHours": {
-                  "type": "number",
-                  "example": 322.1
-                },
-                "close": {
-                  "type": "number",
-                  "example": 325.12
-                },
-                "from": {
-                  "type": "string",
-                  "example": "2023-01-09"
-                },
-                "high": {
-                  "type": "number",
-                  "example": 326.2
-                },
-                "low": {
-                  "type": "number",
-                  "example": 322.3
-                },
-                "open": {
-                  "type": "number",
-                  "example": 324.66
-                },
-                "preMarket": {
-                  "type": "number",
-                  "example": 324.5
-                },
-                "status": {
-                  "type": "string",
-                  "example": "OK"
-                },
-                "symbol": {
-                  "type": "string",
-                  "example": "AAPL"
-                },
-                "volume": {
-                  "type": "integer",
-                  "example": 26122646
-                }
-              }
+              "$ref": "#/definitions/OpenCloseResponse"
             }
           },
           "400": {
@@ -126,7 +84,53 @@
       "Bearer": []
     }
   ],
-  "definitions": {},
+  "definitions": {
+    "OpenCloseResponse": {
+      "type": "object",
+      "properties": {
+        "afterHours": {
+          "type": "number",
+          "example": 322.1
+        },
+        "close": {
+          "type": "number",
+          "example": 325.12
+        },
+        "from": {
+          "type": "string",
+          "example": "2023-01-09"
+        },
+        "high": {
+          "type": "number",
+          "example": 326.2
+        },
+        "low": {
+          "type": "number",
+          "example": 322.3
+        },
+        "open": {
+          "type": "number",
+          "example": 324.66
+        },
+        "preMarket": {
+          "type": "number",
+          "example": 324.5
+        },
+        "status": {
+          "type": "string",
+          "example": "OK"
+        },
+        "symbol": {
+          "type": "string",
+          "example": "AAPL"
+        },
+        "volume": {
+          "type": "integer",
+          "example": 26122646
+        }
+      }
+    }
+  },
   "externalDocs": {
     "description": "Find out more about Olygon.io",
     "url": "https://olygon.io"
