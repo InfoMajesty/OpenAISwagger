@@ -1,0 +1,110 @@
+swagger: "2.0"
+info:
+  description: "Polygon.io Stock Open-Close API"
+  version: "1.0.0"
+  title: "Polygon.io Open-Close API"
+  contact:
+    email: "support@polygon.io"
+host: "api.polygon.io"
+basePath: "/v1"
+schemes:
+  - "https"
+paths:
+  /open-close/{stocksTicker}/{date}:
+    get:
+      summary: "Get the open and close data for a specific stock ticker and date"
+      description: "Fetches the open and close prices for a given stock ticker on a specified date."
+      operationId: "getOpenClose"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "stocksTicker"
+          in: "path"
+          description: "Ticker symbol of the stock (e.g., AAPL, TSLA) to get the open and close data."
+          required: true
+          type: "string"
+        - name: "date"
+          in: "path"
+          description: "The date for the stock data in YYYY-MM-DD format."
+          required: true
+          type: "string"
+          format: "date"
+        - name: "Authorization"
+          in: "header"
+          description: "Bearer token for authentication (API key). Format: Bearer {api_key}"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Successful operation"
+          schema:
+            type: "object"
+            properties:
+              afterHours:
+                type: "number"
+                description: "The after-hours price of the stock."
+              close:
+                type: "number"
+                description: "The closing price for the stock."
+              from:
+                type: "string"
+                format: "date"
+                description: "The date of the stock data."
+              high:
+                type: "number"
+                description: "The highest price for the stock during the day."
+              low:
+                type: "number"
+                description: "The lowest price for the stock during the day."
+              open:
+                type: "number"
+                description: "The opening price for the stock."
+              preMarket:
+                type: "number"
+                description: "The pre-market price of the stock."
+              status:
+                type: "string"
+                description: "Status of the API response."
+              symbol:
+                type: "string"
+                description: "The stock ticker symbol."
+              volume:
+                type: "integer"
+                description: "The total trading volume for the stock."
+        400:
+          description: "Bad request, possibly malformed ticker or date."
+        401:
+          description: "Unauthorized, invalid API key."
+        404:
+          description: "Stock ticker or data not found for the given date."
+definitions:
+  OpenCloseData:
+    type: "object"
+    properties:
+      afterHours:
+        type: "number"
+      close:
+        type: "number"
+      from:
+        type: "string"
+        format: "date"
+      high:
+        type: "number"
+      low:
+        type: "number"
+      open:
+        type: "number"
+      preMarket:
+        type: "number"
+      status:
+        type: "string"
+      symbol:
+        type: "string"
+      volume:
+        type: "integer"
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: "header"
+    description: "API key as bearer token. Format: Bearer {api_key}"
