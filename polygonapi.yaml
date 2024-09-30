@@ -1,110 +1,134 @@
-swagger: "2.0"
-info:
-  description: "Polygon.io Stock Open-Close API"
-  version: "1.0.0"
-  title: "Polygon.io Open-Close API"
-  contact:
-    email: "support@polygon.io"
-host: "api.polygon.io"
-basePath: "/v1"
-schemes:
-  - "https"
-paths:
-  /open-close/{stocksTicker}/{date}:
-    get:
-      summary: "Get the open and close data for a specific stock ticker and date"
-      description: "Fetches the open and close prices for a given stock ticker on a specified date."
-      operationId: "getOpenClose"
-      produces:
-        - "application/json"
-      parameters:
-        - name: "stocksTicker"
-          in: "path"
-          description: "Ticker symbol of the stock (e.g., AAPL, TSLA) to get the open and close data."
-          required: true
-          type: "string"
-        - name: "date"
-          in: "path"
-          description: "The date for the stock data in YYYY-MM-DD format."
-          required: true
-          type: "string"
-          format: "date"
-        - name: "Authorization"
-          in: "header"
-          description: "Bearer token for authentication (API key). Format: Bearer {api_key}"
-          required: true
-          type: "string"
-      responses:
-        200:
-          description: "Successful operation"
-          schema:
-            type: "object"
-            properties:
-              afterHours:
-                type: "number"
-                description: "The after-hours price of the stock."
-              close:
-                type: "number"
-                description: "The closing price for the stock."
-              from:
-                type: "string"
-                format: "date"
-                description: "The date of the stock data."
-              high:
-                type: "number"
-                description: "The highest price for the stock during the day."
-              low:
-                type: "number"
-                description: "The lowest price for the stock during the day."
-              open:
-                type: "number"
-                description: "The opening price for the stock."
-              preMarket:
-                type: "number"
-                description: "The pre-market price of the stock."
-              status:
-                type: "string"
-                description: "Status of the API response."
-              symbol:
-                type: "string"
-                description: "The stock ticker symbol."
-              volume:
-                type: "integer"
-                description: "The total trading volume for the stock."
-        400:
-          description: "Bad request, possibly malformed ticker or date."
-        401:
-          description: "Unauthorized, invalid API key."
-        404:
-          description: "Stock ticker or data not found for the given date."
-definitions:
-  OpenCloseData:
-    type: "object"
-    properties:
-      afterHours:
-        type: "number"
-      close:
-        type: "number"
-      from:
-        type: "string"
-        format: "date"
-      high:
-        type: "number"
-      low:
-        type: "number"
-      open:
-        type: "number"
-      preMarket:
-        type: "number"
-      status:
-        type: "string"
-      symbol:
-        type: "string"
-      volume:
-        type: "integer"
-securityDefinitions:
-  Bearer:
-    type: "apiKey"
-    name: "Authorization"
-    in: "header"
-    description: "API key as bearer token. Format: Bearer {api_key}"
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is the Olygon.io Open-Close API. It provides open and close market data for specified stock tickers.",
+    "version": "1.0.0",
+    "title": "Olygon.io Open-Close API",
+    "contact": {
+      "email": "support@olygon.io"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "api.polygon.io",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/open-close/{stocksTicker}/{date}": {
+      "get": {
+        "tags": [
+          "Market Data"
+        ],
+        "summary": "Get daily open and close data for a stock ticker",
+        "description": "Returns open, close, high, low, and volume data for the specified stock ticker on a given date.",
+        "operationId": "getOpenClose",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "stocksTicker",
+            "in": "path",
+            "description": "The stock ticker for which to retrieve data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "The date for which to retrieve data in YYYY-MM-DD format.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "Authorization",
+            "in": "header",
+            "description": "Bearer token for API authentication.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "afterHours": {
+                  "type": "number",
+                  "example": 322.1
+                },
+                "close": {
+                  "type": "number",
+                  "example": 325.12
+                },
+                "from": {
+                  "type": "string",
+                  "example": "2023-01-09"
+                },
+                "high": {
+                  "type": "number",
+                  "example": 326.2
+                },
+                "low": {
+                  "type": "number",
+                  "example": 322.3
+                },
+                "open": {
+                  "type": "number",
+                  "example": 324.66
+                },
+                "preMarket": {
+                  "type": "number",
+                  "example": 324.5
+                },
+                "status": {
+                  "type": "string",
+                  "example": "OK"
+                },
+                "symbol": {
+                  "type": "string",
+                  "example": "AAPL"
+                },
+                "volume": {
+                  "type": "integer",
+                  "example": 26122646
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameter"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ],
+  "definitions": {},
+  "externalDocs": {
+    "description": "Find out more about Olygon.io",
+    "url": "https://olygon.io"
+  }
+}
